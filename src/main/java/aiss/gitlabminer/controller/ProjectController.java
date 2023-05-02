@@ -8,6 +8,7 @@ import aiss.gitlabminer.model.Project;
 import aiss.gitlabminer.service.GitLabService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -18,6 +19,10 @@ public class ProjectController{
 
     @Autowired
     GitLabService gitLabService;
+
+    @Autowired
+    RestTemplate restTemplate;
+
     // GET http://localhost:8081/gitlab/{id}[?since=5&updatedAfter=30&maxPages=3]
     @GetMapping("/{id}")
     public GitLabMinerProject findOneProject(@PathVariable String id,
@@ -73,6 +78,29 @@ public class ProjectController{
         String created_at = comment.getCreatedAt();
         String updated_at = comment.getUpdatedAt();
         return new GitLabMinerComment(id, body, author, created_at, updated_at);
+    }
+
+
+    @PostMapping("/{id}")
+    public GitLabMinerProject SendProject(@PathVariable String id,
+                                       @RequestParam(required = false) Integer since,
+                                       @RequestParam(required = false, name = "updated_after") Integer updatedAfter,
+                                       @RequestParam(required = false, name = "max_pages") Integer maxPages){
+
+        Project project = gitLabService.getProjectById(id).getBody();
+        String projectId = project.getId().toString();
+        String projectName = project.getName();
+        String project_webUrl = project.getWebUrl();
+        List<GitLabMinerCommit> commits = gitLabService.groupAllCommits(id,since,maxPages).stream().map(x->formateaCommit(x)).toList();
+        List<GitLabMinerIssue> issues = gitLabService.groupAllIssues(id, updatedAfter, maxPages).stream().map(x->formateaIssue(x,id,maxPages)).toList();
+
+        GitLabMinerProject proyectoFormateado = new GitLabMinerProject(projectId,projectName,project_webUrl,commits,issues);
+
+
+       GitLabMinerProject sentProject = restTemplate.postForObject("http://localhost:8080/gitminer/projects", proyectoFormateado,GitLabMinerProject.class);
+
+       return sentProject;
+
     }
 
 }

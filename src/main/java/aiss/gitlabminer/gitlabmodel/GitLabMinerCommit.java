@@ -7,22 +7,22 @@ public class GitLabMinerCommit {
     private String author_name;
     private String author_email;
     private String authored_date;
-    private String commiter_name;
-    private String commiter_email;
+    private String committer_name;
+    private String committer_email;
     private String committed_date;
     private String web_url;
 
     public GitLabMinerCommit(String id, String title, String message, String author_name,
-                             String author_email, String authored_date, String commiter_name,
-                             String commiter_email, String committed_date, String web_url) {
+                             String author_email, String authored_date, String committer_name,
+                             String committer_email, String committed_date, String web_url) {
         this.id = id;
         this.title = title;
         this.message = message;
         this.author_name = author_name;
         this.author_email = author_email;
         this.authored_date = authored_date;
-        this.commiter_name = commiter_name;
-        this.commiter_email = commiter_email;
+        this.committer_name = committer_name;
+        this.committer_email = committer_email;
         this.committed_date = committed_date;
         this.web_url = web_url;
     }
@@ -75,20 +75,20 @@ public class GitLabMinerCommit {
         this.authored_date = authored_date;
     }
 
-    public String getCommiter_name() {
-        return commiter_name;
+    public String getCommitter_name() {
+        return committer_name;
     }
 
-    public void setCommiter_name(String commiter_name) {
-        this.commiter_name = commiter_name;
+    public void setCommitter_name(String committer_name) {
+        this.committer_name = committer_name;
     }
 
-    public String getCommiter_email() {
-        return commiter_email;
+    public String getCommitter_email() {
+        return committer_email;
     }
 
-    public void setCommiter_email(String commiter_email) {
-        this.commiter_email = commiter_email;
+    public void setCommitter_email(String committer_email) {
+        this.committer_email = committer_email;
     }
 
     public String getCommitted_date() {
