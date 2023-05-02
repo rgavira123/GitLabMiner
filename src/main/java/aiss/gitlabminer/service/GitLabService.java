@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import aiss.gitlabminer.util.GitLabUtils;
 
@@ -41,7 +42,7 @@ public class GitLabService {
         return getResponseEntity(uri,Commit[].class);
     }
 
-    public List<Commit> groupAllCommits(String id, Integer since, Integer maxPages) {
+    public List<Commit> groupAllCommits(String id, Integer since, Integer maxPages) throws HttpClientErrorException{
         List<Commit> commits = new ArrayList<>();
         Integer defaultPages;
         String uri = "https://gitlab.com/api/v4/projects/" + id + "/repository/commits/";
@@ -86,7 +87,7 @@ public class GitLabService {
         return getResponseEntity(uri,Issue[].class);
     }
 
-    public List<Issue> groupAllIssues(String id, Integer updated_after, Integer maxPages) {
+    public List<Issue> groupAllIssues(String id, Integer updated_after, Integer maxPages) throws HttpClientErrorException {
         List<Issue> issues = new ArrayList<>();
         Integer defaultPages;
         String uri = "https://gitlab.com/api/v4/projects/" + id + "/issues";
@@ -129,7 +130,7 @@ public class GitLabService {
         return getResponseEntity(uri,Comment[].class);
     }
 
-    public List<Comment> groupIssueComments(String id, String issue_iid, Integer maxPages){
+    public List<Comment> groupIssueComments(String id, String issue_iid, Integer maxPages) throws HttpClientErrorException{
         List<Comment> comments = new ArrayList<>();
         Integer defaultPages;
         String uri = "https://gitlab.com/api/v4/projects/" + id + "/issues/" + issue_iid + "/notes";

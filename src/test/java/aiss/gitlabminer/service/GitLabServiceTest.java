@@ -71,5 +71,4 @@ class GitLabServiceTest {
     // funcionGetgitLabMiner(String id, Integer since, Integer updated_after, Integer maxPages){ Project proyecto = getProjectById(id).getBody()
     // ProjectGitMiner proyectoRefactor = formateaProyecto(proyecto)}
 
-
 }

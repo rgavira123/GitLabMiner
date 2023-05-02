@@ -70,7 +70,7 @@ public class Issue {
     @JsonProperty("updated_at")
     private String updatedAt;
     @JsonProperty("closed_at")
-    private Object closedAt;
+    private String closedAt;
     @JsonProperty("closed_by")
     private Object closedBy;
     @JsonProperty("labels")
@@ -84,7 +84,7 @@ public class Issue {
     @JsonProperty("type")
     private String type;
     @JsonProperty("assignee")
-    private Object assignee;
+    private Author assignee;
     @JsonProperty("user_notes_count")
     private Integer userNotesCount;
     @JsonProperty("merge_requests_count")
@@ -215,12 +215,12 @@ public class Issue {
     }
 
     @JsonProperty("closed_at")
-    public Object getClosedAt() {
+    public String getClosedAt() {
         return closedAt;
     }
 
     @JsonProperty("closed_at")
-    public void setClosedAt(Object closedAt) {
+    public void setClosedAt(String closedAt) {
         this.closedAt = closedAt;
     }
 
@@ -285,12 +285,12 @@ public class Issue {
     }
 
     @JsonProperty("assignee")
-    public Object getAssignee() {
+    public Author getAssignee() {
         return assignee;
     }
 
     @JsonProperty("assignee")
-    public void setAssignee(Object assignee) {
+    public void setAssignee(Author assignee) {
         this.assignee = assignee;
     }
 
