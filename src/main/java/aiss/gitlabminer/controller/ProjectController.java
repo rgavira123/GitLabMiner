@@ -26,8 +26,8 @@ public class ProjectController{
     // GET http://localhost:8081/gitlab/{id}[?since=5&updatedAfter=30&maxPages=3]
     @GetMapping("/{id}")
     public GitLabMinerProject findOneProject(@PathVariable String id,
-                                             @RequestParam(required = false) Integer since,
-                                             @RequestParam(required = false, name = "updated_after") Integer updatedAfter,
+                                             @RequestParam(required = false, name = "sinceCommits") Integer since,
+                                             @RequestParam(required = false, name = "sinceIssues") Integer updatedAfter,
                                              @RequestParam(required = false, name = "max_pages") Integer maxPages){
         Project project = gitLabService.getProjectById(id).getBody();
         String projectId = project.getId().toString();
@@ -83,8 +83,8 @@ public class ProjectController{
 
     @PostMapping("/{id}")
     public GitLabMinerProject SendProject(@PathVariable String id,
-                                       @RequestParam(required = false) Integer since,
-                                       @RequestParam(required = false, name = "updated_after") Integer updatedAfter,
+                                       @RequestParam(required = false,name="sinceCommits") Integer since,
+                                       @RequestParam(required = false, name = "sinceIssues") Integer updatedAfter,
                                        @RequestParam(required = false, name = "max_pages") Integer maxPages){
 
         Project project = gitLabService.getProjectById(id).getBody();
