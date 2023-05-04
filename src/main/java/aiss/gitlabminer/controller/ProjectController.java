@@ -7,9 +7,11 @@ import aiss.gitlabminer.model.Issue;
 import aiss.gitlabminer.model.Project;
 import aiss.gitlabminer.service.GitLabService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.http.HttpResponse;
 import java.util.List;
 
 
@@ -82,6 +84,7 @@ public class ProjectController{
 
 
     @PostMapping("/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
     public GitLabMinerProject SendProject(@PathVariable String id,
                                        @RequestParam(required = false,name="sinceCommits") Integer since,
                                        @RequestParam(required = false, name = "sinceIssues") Integer updatedAfter,
