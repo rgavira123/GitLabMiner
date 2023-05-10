@@ -32,8 +32,12 @@ public class GitLabService {
 
     public ResponseEntity<Project> getProjectById(String id){
         String uri = "https://gitlab.com/api/v4/projects/"+id;
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("PRIVATE-TOKEN", token);
 
-        return restTemplate.exchange(uri, HttpMethod.GET, null, Project.class);
+        HttpEntity<Project> request = new HttpEntity<>(null,headers);
+
+        return restTemplate.exchange(uri, HttpMethod.GET, request, Project.class);
     }
 
     public ResponseEntity<Commit[]> getAllCommits(String id) {
